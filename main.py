@@ -1,5 +1,6 @@
 from google import genai
 from dotenv import load_dotenv
+from comandos import abrir_brave
 import os
 
 # Cargar las variables del archivo .env
@@ -24,6 +25,10 @@ while True:
         print("Nova: Hasta luego 👋")
         break
 
+    if pregunta.lower() == "abre brave":
+        abrir_brave()
+        print("Nova: Abriendo Brave...")
+        continue
     respuesta = client.models.generate_content(
         model="gemini-3.5-flash-lite",
         contents=pregunta

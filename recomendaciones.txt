@@ -1,0 +1,10 @@
+primero como es una prueba y la terminal windows no deja activar scrip usamos el siguiente comando 
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+primero vamos a activar el entorno virtual con el siguiente comando 
+.\venv\Scripts\activate
+
+Instalar la librería de Gemini
+pip install google-genai
+
+en el punto.env es el api key de gemini

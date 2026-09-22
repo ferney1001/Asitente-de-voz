@@ -1,5 +1,6 @@
 import os
 
+# hasta aqui por hoy
 
 def abrir_brave():
     os.startfile("brave.exe")

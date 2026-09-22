@@ -39,3 +39,5 @@ while True:
     print()
     print("Nova:", respuesta.text)
     print()
+    
+    #asta aqui por hoy

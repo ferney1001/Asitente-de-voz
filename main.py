@@ -13,7 +13,7 @@ client = genai.Client(api_key=api_key)
 
 # Enviar una pregunta
 respuesta = client.models.generate_content(
-    model="gemini-3.6-flash",
+    model="gemini-3.5-flash-lite",
     contents="Hola, me llamo Nova. Preséntate brevemente."
 )
 

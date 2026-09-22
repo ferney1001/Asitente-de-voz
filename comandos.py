@@ -1,7 +1,6 @@
 import os
 
 
-
 def abrir_brave():
     os.startfile("brave.exe")
 
@@ -14,5 +13,3 @@ def procesar_comando(pregunta):
         return "Abriendo Brave..."
 
     return None
-
-# este es un cambio que hago para probar el git reset

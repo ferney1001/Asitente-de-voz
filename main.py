@@ -25,17 +25,10 @@ while True:
         print("Nova: Hasta luego 👋")
         break
 
-    mensaje = procesar_comando(pregunta)
-
-    if mensaje:
-        print("Nova:", mensaje)
-    mensaje = procesar_comando(pregunta)
-
-    if mensaje:
-        print("Nova:", mensaje)
+    if pregunta.lower() == "abre brave":
+        abrir_brave()
+        print("Nova: Abriendo Brave...")
         continue
-
-
     respuesta = client.models.generate_content(
         model="gemini-3.5-flash-lite",
         contents=pregunta

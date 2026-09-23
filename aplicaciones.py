@@ -6,7 +6,7 @@ APLICACIONES = {
     "whatsapp": "WhatsApp.exe",
     "word": "WINWORD.EXE",
     "excel": "EXCEL.EXE",
-    "discord": "Discord.exe",
+    "discord": r"C:\Users\ferne\AppData\Local\Discord\app-1.0.9258\Discord.exe",
     "power point": "POWERPNT.EXE",
     "visual studio code": "Code.exe"
 }

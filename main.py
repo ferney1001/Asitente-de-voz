@@ -17,6 +17,7 @@ print("          NOVA 🤖")
 print("==============================")
 print("Escribe 'salir' para terminar.\n")
 
+
 while True:
 
     pregunta = input("Tú: ")
@@ -25,16 +26,26 @@ while True:
         print("Nova: Hasta luego 👋")
         break
 
+    # Primero revisar si es un comando
     respuesta_comando = procesar_comando(pregunta)
 
     if respuesta_comando:
         print("Nova:", respuesta_comando)
         continue
-    respuesta = client.models.generate_content(
-        model="gemini-3.5-flash-lite",
-        contents=pregunta
-    )
 
-    print("Nova:", respuesta.text)
-    print()
-    #asta aqui por hoy
+    # Si no es un comando, preguntarle a Gemini
+    try:
+
+        respuesta = client.models.generate_content(
+            model="gemini-3.5-flash-lite",
+            contents=pregunta
+        )
+
+        print("Nova:", respuesta.text)
+        print()
+
+    except Exception as e:
+
+        print("Nova: Tuve un problema al comunicarme con Gemini.")
+        print("Error:", e)
+        print()

@@ -6,18 +6,21 @@ def abrir_aplicacion(nombre):
     programa = APLICACIONES.get(nombre)
 
     if programa:
-        subprocess.Popen(
-            [programa],
-            stdin=subprocess.DEVNULL,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-            creationflags=subprocess.CREATE_NEW_PROCESS_GROUP
-        )
+        try:
+            subprocess.Popen(
+                [programa],
+                stdin=subprocess.DEVNULL,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                creationflags=subprocess.CREATE_NEW_PROCESS_GROUP
+            )
 
-        return f"Abriendo {nombre}..."
+            return f"Abriendo {nombre}..."
 
+        except Exception as e:
+            return f"No pude abrir {nombre}. Error: {e}"
 
-    return None
+    return f"No encontré la aplicación {nombre}."
 
 
 def procesar_comando(pregunta):
@@ -26,7 +29,12 @@ def procesar_comando(pregunta):
 
     for nombre in APLICACIONES:
 
-        if f"abre {nombre}" in pregunta or f"abrir {nombre}" in pregunta:
+        if (
+            f"abre {nombre}" in pregunta
+            or f"abrir {nombre}" in pregunta
+            or f"abre la {nombre}" in pregunta
+            or f"abrir la {nombre}" in pregunta
+        ):
             return abrir_aplicacion(nombre)
 
     return None

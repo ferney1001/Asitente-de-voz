@@ -1,7 +1,6 @@
 from google import genai
 from dotenv import load_dotenv
 from comandos import procesar_comando
-from comandos import procesar_comando
 import os
 
 # Cargar las variables del archivo .env

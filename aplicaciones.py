@@ -1,7 +1,6 @@
 APLICACIONES = {
-    "brave": "brave.exe",
-    "chrome": "chrome.exe",
-    "calculadora": "calc.exe",
+    "brave": r"C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe",
+    "calculadora": r"C:\Windows\System32\calc.exe",
     "bloc de notas": "notepad.exe",
     "whatsapp": "WhatsApp.exe",
     "word": "WINWORD.EXE",

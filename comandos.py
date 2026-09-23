@@ -1,17 +1,13 @@
 import os
-
+from aplicaciones import APLICACIONES
 # hasta aqui por hoy
 
-def abrir_brave():
-    os.startfile("brave.exe")
 
-def procesar_comando(pregunta):
+def abrir_aplicacion(nombre):
+    programa = APLICACIONES.get(nombre)
 
-    pregunta = pregunta.lower()
-
-    if "brave" in pregunta or "navegador" in pregunta:
-        abrir_brave()
-        return "Abriendo Brave..."
+    if programa:
+        os.startfile(programa)
+        return f"Abriendo {nombre}..."
 
     return None
-

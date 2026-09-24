@@ -63,11 +63,40 @@ def abrir_aplicacion(nombre):
     return f"No encontré el archivo de {nombre}."
 
 
+def cerrar_aplicacion(nombre):
+
+    programa = APLICACIONES.get(nombre)
+
+    if not programa:
+        return f"No tengo registrada la aplicación {nombre}."
+
+    procesos_cierre = {
+        "calculadora": "CalculatorApp.exe"
+    }
+
+    proceso = procesos_cierre.get(nombre, programa)
+
+    try:
+        resultado = subprocess.run(
+            ["taskkill", "/IM", proceso, "/F"],
+            capture_output=True,
+            text=True
+        )
+
+        if resultado.returncode == 0:
+            return f"Cerrando {nombre}..."
+
+        return f"La aplicación {nombre} no está abierta."
+
+    except Exception as e:
+        return f"No pude cerrar {nombre}. Error: {e}"
+
+
 def procesar_comando(pregunta):
 
     pregunta = pregunta.lower().strip()
 
-    # Revisar aplicaciones que ya conocemos
+    # Revisar aplicaciones que ya conocemos para abrir
     for nombre in APLICACIONES:
 
         if (
@@ -80,8 +109,20 @@ def procesar_comando(pregunta):
         ):
             return abrir_aplicacion(nombre)
 
-    # Detectar una aplicación que no está en el diccionario
-    frases = [
+    # Revisar aplicaciones que ya conocemos para cerrar
+    for nombre in APLICACIONES:
+
+        if (
+            f"cierra {nombre}" in pregunta
+            or f"cerrar {nombre}" in pregunta
+            or f"puedes cerrar {nombre}" in pregunta
+            or f"puedes cerrar el {nombre}" in pregunta
+            or f"quiero cerrar {nombre}" in pregunta
+        ):
+            return cerrar_aplicacion(nombre)
+
+    # Detectar una aplicación que no está en el diccionario para abrir
+    frases_abrir = [
         "abre ",
         "abrir ",
         "abre la ",
@@ -90,7 +131,7 @@ def procesar_comando(pregunta):
         "quiero abrir "
     ]
 
-    for frase in frases:
+    for frase in frases_abrir:
 
         if pregunta.startswith(frase):
 
@@ -117,5 +158,33 @@ def procesar_comando(pregunta):
                         return f"No pude abrir {nombre}. Error: {e}"
 
                 return f"No encontré la aplicación {nombre}."
+
+    # Detectar una aplicación que no está en el diccionario para cerrar
+    frases_cerrar = [
+        "cierra ",
+        "cerrar ",
+        "puedes cerrar ",
+        "quiero cerrar "
+    ]
+
+    for frase in frases_cerrar:
+
+        if pregunta.startswith(frase):
+
+            nombre = pregunta[len(frase):].strip()
+
+            if nombre:
+                programa = nombre + ".exe"
+
+                resultado = subprocess.run(
+                    ["taskkill", "/IM", programa, "/F"],
+                    capture_output=True,
+                    text=True
+                )
+
+                if resultado.returncode == 0:
+                    return f"Cerrando {nombre}..."
+
+                return f"La aplicación {nombre} no está abierta."
 
     return None
